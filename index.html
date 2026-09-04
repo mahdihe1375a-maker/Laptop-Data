@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LAPTOP DATA | Specifications & Comparison</title>
+  <meta name="description" content="Complete laptop specifications and comparison tool">
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" type="image/png" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💻</text></svg>">
+</head>
+<body>
+  <!-- Header -->
+  <header class="header">
+    <nav class="nav">
+      <a href="index.html" class="logo">
+        <img src="logo.png" alt="LAPTOP DATA" class="logo-img" onerror="this.style.display='none'">
+        <span class="logo-text">LAPTOP DATA</span>
+      </a>
+      <div class="nav-actions">
+        <a href="admin.html" class="btn btn-secondary">
+          🔐 Admin Panel
+        </a>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero">
+    <h1>Find Your Perfect Laptop</h1>
+    <p>Complete specifications, detailed comparisons, and smart choices from the world's best laptops</p>
+    <div class="stats">
+      <div class="stat-item">
+        <span class="stat-number" id="totalLaptops">0</span>
+        <span class="stat-label">Laptops</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-number">15+</span>
+        <span class="stat-label">Brands</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-number">100%</span>
+        <span class="stat-label">Free</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Controls -->
+  <div class="controls">
+    <div class="search-bar">
+      <span class="search-icon">🔍</span>
+      <input type="text" id="searchInput" placeholder="Search laptop name, brand, or processor...">
+    </div>
+
+    <div class="filters" id="filters">
+      <select class="filter-select" data-filter="brand">
+        <option value="">All Brands</option>
+      </select>
+      <select class="filter-select" data-filter="cpuType">
+        <option value="">All Processors</option>
+        <option value="Apple Silicon">Apple Silicon</option>
+        <option value="Intel">Intel</option>
+        <option value="AMD">AMD</option>
+      </select>
+      <select class="filter-select" data-filter="ram">
+        <option value="">All RAM</option>
+        <option value="8 GB">8 GB</option>
+        <option value="16 GB">16 GB</option>
+        <option value="18 GB">18 GB</option>
+        <option value="32 GB">32 GB</option>
+        <option value="64 GB">64 GB</option>
+      </select>
+      <select class="filter-select" data-filter="displayType">
+        <option value="">All Displays</option>
+        <option value="IPS">IPS</option>
+        <option value="OLED">OLED</option>
+        <option value="Liquid Retina">Liquid Retina</option>
+        <option value="Retina">Retina</option>
+      </select>
+      <select class="filter-select" data-filter="displaySize">
+        <option value="">All Sizes</option>
+        <option value="13">13 inch</option>
+        <option value="14">14 inch</option>
+        <option value="15">15 inch</option>
+        <option value="16">16 inch</option>
+        <option value="17">17 inch</option>
+      </select>
+      <select class="filter-select" data-filter="gpu">
+        <option value="">All Graphics</option>
+        <option value="Intel">Intel Iris</option>
+        <option value="NVIDIA">NVIDIA RTX</option>
+        <option value="AMD">AMD Radeon</option>
+        <option value="Apple">Apple Silicon</option>
+      </select>
+      <button class="reset-filters" onclick="resetFilters()">Clear Filters</button>
+    </div>
+
+    <div class="results-info" id="resultsInfo">Loading...</div>
+  </div>
+
+  <!-- Laptops Grid -->
+  <div class="laptops-grid" id="laptopsGrid"></div>
+
+  <!-- Compare Bar -->
+  <div class="compare-bar" id="compareBar">
+    <div class="compare-count">
+      <strong id="compareCount">0</strong> laptops selected for comparison
+    </div>
+    <button class="btn btn-primary" onclick="openCompare()">Compare Now</button>
+    <button class="btn btn-secondary" onclick="clearCompare()">Clear</button>
+  </div>
+
+  <!-- Detail Modal -->
+  <div class="modal-overlay" id="detailModal">
+    <div class="modal">
+      <button class="modal-close" onclick="closeModal('detailModal')">✕</button>
+      <div id="detailContent"></div>
+    </div>
+  </div>
+
+  <!-- Compare Modal -->
+  <div class="modal-overlay" id="compareModal">
+    <div class="modal">
+      <button class="modal-close" onclick="closeModal('compareModal')">✕</button>
+      <div style="padding: 40px;">
+        <h2 style="font-size: 28px; font-weight: 800; margin-bottom: 24px; letter-spacing: -1px;">Laptop Comparison</h2>
+        <div id="compareContent"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-content">
+      <p>&copy; 2026 LAPTOP DATA. All rights reserved.</p>
+      <div class="footer-links">
+        <a href="#">About</a>
+        <a href="#">Privacy</a>
+        <a href="#">Terms</a>
+        <a href="#">Contact</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Toast -->
+  <div class="toast" id="toast"></div>
+
+  <script src="data.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
