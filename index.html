@@ -6,7 +6,7 @@
   <title>LAPTOP DATA | Specifications & Comparison</title>
   <meta name="description" content="Complete laptop specifications and comparison tool">
   <link rel="stylesheet" href="style.css">
-  <link rel="icon" type="image/png" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💻</text></svg>">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💻</text></svg>">
 </head>
 <body>
   <!-- Header -->
@@ -17,38 +17,69 @@
         <span class="logo-text">LAPTOP DATA</span>
       </a>
       <div class="nav-actions">
-        <a href="admin.html" class="btn btn-secondary">
-          🔐 Admin Panel
-        </a>
+        <button class="menu-toggle" onclick="toggleSidebar()" aria-label="Menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
       </div>
     </nav>
   </header>
 
+  <!-- Sidebar -->
+  <div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleSidebar()"></div>
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <div class="logo">
+        <img src="logo.png" alt="LAPTOP DATA" class="logo-img" onerror="this.style.display='none'">
+        <span class="logo-text">LAPTOP DATA</span>
+      </div>
+      <button class="sidebar-close" onclick="toggleSidebar()"></button>
+    </div>
+    <nav class="sidebar-nav">
+      <a href="index.html" class="sidebar-link active">
+        <span class="sidebar-link-icon"></span>
+        <span>Home</span>
+      </a>
+      <a href="#laptops" class="sidebar-link" onclick="scrollToLaptops(); toggleSidebar();">
+        <span class="sidebar-link-icon">◫</span>
+        <span>All Laptops</span>
+      </a>
+      <a href="#" class="sidebar-link" onclick="showCompareFromMenu(); return false;">
+        <span class="sidebar-link-icon">⇌</span>
+        <span>Compare</span>
+      </a>
+      <div class="sidebar-divider"></div>
+      <a href="#" class="sidebar-link">
+        <span class="sidebar-link-icon">◉</span>
+        <span>About</span>
+      </a>
+      <a href="#" class="sidebar-link">
+        <span class="sidebar-link-icon"></span>
+        <span>Contact</span>
+      </a>
+      <div class="sidebar-divider"></div>
+      <a href="admin.html" class="sidebar-link">
+        <span class="sidebar-link-icon">⚙</span>
+        <span>Admin Panel</span>
+      </a>
+    </nav>
+    <div class="sidebar-footer">
+      © 2026 LAPTOP DATA. All rights reserved.
+    </div>
+  </aside>
+
   <!-- Hero -->
   <section class="hero">
     <h1>Find Your Perfect Laptop</h1>
-    <p>Complete specifications, detailed comparisons, and smart choices from the world's best laptops</p>
-    <div class="stats">
-      <div class="stat-item">
-        <span class="stat-number" id="totalLaptops">0</span>
-        <span class="stat-label">Laptops</span>
-      </div>
-      <div class="stat-item">
-        <span class="stat-number">15+</span>
-        <span class="stat-label">Brands</span>
-      </div>
-      <div class="stat-item">
-        <span class="stat-number">100%</span>
-        <span class="stat-label">Free</span>
-      </div>
-    </div>
+    <p>Complete specifications, detailed comparisons, and informed decisions from the world's leading laptop brands.</p>
   </section>
 
   <!-- Controls -->
-  <div class="controls">
+  <div class="controls" id="laptops">
     <div class="search-bar">
       <span class="search-icon">🔍</span>
-      <input type="text" id="searchInput" placeholder="Search laptop name, brand, or processor...">
+      <input type="text" id="searchInput" placeholder="Search by name, brand, or processor...">
     </div>
 
     <div class="filters" id="filters">
@@ -63,11 +94,6 @@
       </select>
       <select class="filter-select" data-filter="ram">
         <option value="">All RAM</option>
-        <option value="8 GB">8 GB</option>
-        <option value="16 GB">16 GB</option>
-        <option value="18 GB">18 GB</option>
-        <option value="32 GB">32 GB</option>
-        <option value="64 GB">64 GB</option>
       </select>
       <select class="filter-select" data-filter="displayType">
         <option value="">All Displays</option>
@@ -86,12 +112,12 @@
       </select>
       <select class="filter-select" data-filter="gpu">
         <option value="">All Graphics</option>
-        <option value="Intel">Intel Iris</option>
-        <option value="NVIDIA">NVIDIA RTX</option>
-        <option value="AMD">AMD Radeon</option>
-        <option value="Apple">Apple Silicon</option>
+        <option value="Intel">Intel</option>
+        <option value="NVIDIA">NVIDIA</option>
+        <option value="AMD">AMD</option>
+        <option value="Apple">Apple</option>
       </select>
-      <button class="reset-filters" onclick="resetFilters()">Clear Filters</button>
+      <button class="reset-filters" onclick="resetFilters()">Clear</button>
     </div>
 
     <div class="results-info" id="resultsInfo">Loading...</div>
@@ -103,9 +129,9 @@
   <!-- Compare Bar -->
   <div class="compare-bar" id="compareBar">
     <div class="compare-count">
-      <strong id="compareCount">0</strong> laptops selected for comparison
+      <strong id="compareCount">0</strong> selected for comparison
     </div>
-    <button class="btn btn-primary" onclick="openCompare()">Compare Now</button>
+    <button class="btn btn-primary" onclick="openCompare()">Compare</button>
     <button class="btn btn-secondary" onclick="clearCompare()">Clear</button>
   </div>
 
@@ -121,8 +147,8 @@
   <div class="modal-overlay" id="compareModal">
     <div class="modal">
       <button class="modal-close" onclick="closeModal('compareModal')">✕</button>
-      <div style="padding: 40px;">
-        <h2 style="font-size: 28px; font-weight: 800; margin-bottom: 24px; letter-spacing: -1px;">Laptop Comparison</h2>
+      <div style="padding: 30px 40px;">
+        <h2 style="font-size: 24px; font-weight: 700; margin-bottom: 20px; letter-spacing: -0.5px;">Laptop Comparison</h2>
         <div id="compareContent"></div>
       </div>
     </div>
@@ -130,15 +156,7 @@
 
   <!-- Footer -->
   <footer class="footer">
-    <div class="footer-content">
-      <p>&copy; 2026 LAPTOP DATA. All rights reserved.</p>
-      <div class="footer-links">
-        <a href="#">About</a>
-        <a href="#">Privacy</a>
-        <a href="#">Terms</a>
-        <a href="#">Contact</a>
-      </div>
-    </div>
+    <p>© 2026 LAPTOP DATA. All rights reserved.</p>
   </footer>
 
   <!-- Toast -->
