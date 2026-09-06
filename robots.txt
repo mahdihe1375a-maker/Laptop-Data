@@ -1,3 +1,0 @@
-User-agent: *
-Allow: /
-Sitemap: https://mahdihe1375a-maker.github.io/Laptop-Data/sitemap.xml
